@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1b1a17" />
+  <title>SAT Golden Trio</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Login / onboarding screen -->
+  <div id="auth" class="auth hidden"></div>
+
+  <!-- Main app -->
+  <div id="app" class="hidden">
+    <header id="topbar">
+      <div class="brand">SAT&nbsp;<span class="gold">Golden Trio</span></div>
+      <div id="countdown" class="countdown"></div>
+      <div id="presence" class="presence"></div>
+    </header>
+
+    <nav id="nav"></nav>
+
+    <main id="view"></main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <div id="modal" class="modal-overlay hidden"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

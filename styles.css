@@ -1,0 +1,118 @@
+/* ── SAT Golden Trio — minimal mobile-first styles ─────────────────────────── */
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1f1d1a; --muted:#7d766b;
+  --line:#e7e2d8; --gold:#c79a3a; --gold-soft:#f6ecd2;
+  --green:#3f8f5b; --red:#c0563f; --blue:#3d6ea5;
+  --radius:14px; --shadow:0 1px 3px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.45;
+  -webkit-text-size-adjust:100%;
+}
+.hidden{display:none !important}
+.muted{color:var(--muted); font-size:.85em}
+.gold{color:var(--gold)}
+a{color:var(--blue)}
+
+/* ── Top bar ──────────────────────────────────────────────────────────────── */
+#topbar{
+  position:sticky; top:0; z-index:20;
+  background:#1b1a17; color:#f3efe6; padding:10px 14px;
+  display:flex; flex-direction:column; gap:6px;
+}
+.brand{font-weight:700; letter-spacing:.3px}
+.countdown{display:flex; gap:10px; flex-wrap:wrap}
+.cd-unit{background:#2b2924; border-radius:8px; padding:4px 8px; text-align:center; min-width:52px}
+.cd-num{font-size:1.15rem; font-weight:700; color:var(--gold)}
+.cd-lab{font-size:.6rem; text-transform:uppercase; color:#b8b1a4; letter-spacing:.5px}
+.presence{font-size:.8rem; color:#cfc8ba; display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 0 0 rgba(63,143,91,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,143,91,.5)}70%{box-shadow:0 0 0 7px rgba(63,143,91,0)}100%{box-shadow:0 0 0 0 rgba(63,143,91,0)}}
+
+/* ── Nav (horizontal scroll tabs) ─────────────────────────────────────────── */
+#nav{
+  position:sticky; top:0; z-index:15;
+  display:flex; gap:6px; overflow-x:auto; padding:8px 10px;
+  background:var(--card); border-bottom:1px solid var(--line);
+  -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+#nav::-webkit-scrollbar{display:none}
+#nav a{
+  flex:0 0 auto; text-decoration:none; color:var(--muted);
+  padding:6px 12px; border-radius:999px; font-size:.85rem; white-space:nowrap;
+  border:1px solid transparent;
+}
+#nav a.active{background:var(--gold-soft); color:#8a6a1e; border-color:#eaddbd; font-weight:600}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+#view{padding:14px; max-width:760px; margin:0 auto}
+h1{font-size:1.3rem; margin:.2em 0 .1em}
+h2{font-size:1.05rem; margin:1.1em 0 .4em}
+.sub{color:var(--muted); margin:.1em 0 1em}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:14px; margin-bottom:12px; box-shadow:var(--shadow)}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.spread{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.grid{display:grid; gap:10px}
+.tag{display:inline-block; background:var(--gold-soft); color:#8a6a1e; border-radius:999px; padding:2px 10px; font-size:.75rem; font-weight:600}
+.pill{display:inline-block; border-radius:999px; padding:2px 9px; font-size:.72rem; font-weight:600}
+.pill.solved{background:#e3f1e7; color:var(--green)}
+.pill.need_help{background:#fbe7e1; color:var(--red)}
+.pill.open{background:#eef0f4; color:var(--muted)}
+
+/* ── Forms ────────────────────────────────────────────────────────────────── */
+input,textarea,select,button{font:inherit}
+input,textarea,select{
+  width:100%; padding:9px 11px; border:1px solid var(--line);
+  border-radius:10px; background:#fff; color:var(--ink); margin:4px 0;
+}
+textarea{min-height:64px; resize:vertical}
+label{font-size:.85rem; color:var(--muted); display:block; margin-top:8px}
+button{
+  cursor:pointer; border:none; border-radius:10px; padding:9px 14px;
+  background:var(--gold); color:#fff; font-weight:600;
+}
+button.ghost{background:transparent; color:var(--gold); border:1px solid var(--gold)}
+button.soft{background:#eee7d8; color:#8a6a1e}
+button.tiny{padding:4px 9px; font-size:.78rem; border-radius:8px}
+button:disabled{opacity:.5; cursor:default}
+.btn-row{display:flex; gap:8px; flex-wrap:wrap}
+
+/* ── Misc components ──────────────────────────────────────────────────────── */
+.help-btn{background:#eee7d8; color:#8a6a1e; width:26px; height:26px; border-radius:50%; padding:0; font-weight:700; flex:0 0 auto}
+.comments{margin-top:8px; border-top:1px dashed var(--line); padding-top:8px}
+.comment{font-size:.88rem; margin-bottom:6px}
+.comment-form{display:flex; gap:6px; margin-top:6px}
+.comment-form input{margin:0}
+.comment-form button{flex:0 0 auto}
+.feed-item{font-size:.9rem; padding:7px 0; border-bottom:1px solid var(--line)}
+.feed-item:last-child{border-bottom:none}
+.bar{height:18px; background:var(--gold); border-radius:5px; min-width:2px}
+.barwrap{display:flex; align-items:center; gap:8px; margin:4px 0; font-size:.82rem}
+.barwrap .lab{width:130px; flex:0 0 auto; color:var(--muted)}
+.chip{font-size:.72rem; background:#eef0f4; border-radius:6px; padding:1px 7px; color:var(--muted)}
+
+/* tables */
+table{width:100%; border-collapse:collapse; font-size:.85rem}
+th,td{text-align:left; padding:6px 8px; border-bottom:1px solid var(--line)}
+th{color:var(--muted); font-weight:600}
+.scroll-x{overflow-x:auto}
+
+/* flashcard */
+.flash{min-height:160px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:1.3rem; cursor:pointer; user-select:none}
+.flash .hintline{font-size:.8rem; color:var(--muted); margin-top:10px}
+
+/* ── Auth / onboarding ────────────────────────────────────────────────────── */
+.auth{min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:20px; background:#1b1a17}
+.auth .box{background:var(--card); border-radius:18px; padding:22px; width:100%; max-width:380px; box-shadow:0 10px 40px rgba(0,0,0,.3)}
+.auth h1{text-align:center}
+
+/* ── Toast + modal ────────────────────────────────────────────────────────── */
+.toast{position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#1b1a17; color:#fff; padding:10px 16px; border-radius:999px; z-index:100; font-size:.88rem; box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:90; display:flex; align-items:center; justify-content:center; padding:18px}
+.modal{background:var(--card); border-radius:16px; padding:20px; max-width:440px; width:100%; max-height:85vh; overflow:auto}
+.modal h2{margin-top:0}
+
+@media(min-width:620px){ .countdown{gap:14px} .grid.two{grid-template-columns:1fr 1fr} }
