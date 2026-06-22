@@ -3,16 +3,16 @@ import { supabase, state } from "./db.js";
 import { SAT_DATE } from "./config.js";
 import { $, $$, esc, toast } from "./util.js";
 
-import { renderToday }       from "./sections/today.js";
-import { renderPlan }        from "./sections/plan.js";
-import { renderQuestions }   from "./sections/questions.js";
-import { renderVocab }       from "./sections/vocab.js";
-import { renderMistakes }    from "./sections/mistakes.js";
-import { renderTests }       from "./sections/tests.js";
-import { renderChat }        from "./sections/chat.js";
-import { renderDashboard }   from "./sections/dashboard.js";
-import { renderReflections } from "./sections/reflections.js";
-import { renderFormulas }    from "./sections/formulas.js";
+import { renderToday }     from "./today.js";
+import { renderPlan }      from "./plan.js";
+import { renderQuestions } from "./questions.js";
+import { renderVocab }     from "./vocab.js";
+import { renderMistakes }  from "./mistakes.js";
+import { renderTests }     from "./tests.js";
+import { renderChat }      from "./chat.js";
+import { renderDashboard } from "./dashboard.js";
+import { renderReflections } from "./reflections.js";
+import { renderFormulas }  from "./formulas.js";
 
 const ROUTES = {
   today:       { label:"🏠 Today",      render:renderToday },
