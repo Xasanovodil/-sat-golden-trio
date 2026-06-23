@@ -1,7 +1,7 @@
 // ── Section 6: Group Chat (realtime) ────────────────────────────────────────
-import { supabase, state } from "../db.js";
-import { esc, timeAgo, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
+import { supabase, state } from "./db.js";
+import { esc, timeAgo, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
 
 let channel = null;
 
