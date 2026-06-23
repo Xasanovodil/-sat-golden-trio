@@ -1,7 +1,7 @@
 // ── Section 7: Shared Dashboard (everyone side by side, no ranking) ─────────
-import { supabase } from "../db.js";
-import { esc, todayStr, addDays } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
+import { supabase } from "./db.js";
+import { esc, todayStr, addDays } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
 
 export async function renderDashboard(view){
   const [users, tests, activity, reviews, questions, mastery] = await Promise.all([
