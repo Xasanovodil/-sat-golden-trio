@@ -1,5 +1,5 @@
 // ── Static Math Formula Sheet ───────────────────────────────────────────────
-import { helpButton, wireHelp } from "../help.js";
+import { helpButton, wireHelp } from "./help.js";
 
 export async function renderFormulas(view){
   view.innerHTML = `
