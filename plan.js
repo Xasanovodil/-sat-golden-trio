@@ -1,8 +1,8 @@
 // ── Section 1: Shared Study Plan ────────────────────────────────────────────
-import { supabase, state, logActivity } from "../db.js";
-import { SAT_DATE } from "../config.js";
-import { esc, prettyDate, timeAgo, todayStr, addDays, modal, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
+import { supabase, state, logActivity } from "./db.js";
+import { SAT_DATE } from "./config.js";
+import { esc, prettyDate, timeAgo, todayStr, addDays, modal, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
 
 export async function renderPlan(view){
   const today  = todayStr();
