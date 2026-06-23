@@ -5,6 +5,8 @@ import { SKILLS } from "./config.js";
 import { esc, timeAgo, downloadCSV, $ } from "./util.js";
 import { helpButton, wireHelp } from "./help.js";
 import { renderComments } from "./comments.js";
+import { reactionsHTML, wireReactions } from "./reactions.js";
+import { uploadImage, thumb } from "./uploads.js";
 
 const PALETTE = ["#c79a3a","#3d6ea5","#3f8f5b","#c0563f","#8a6db9","#b9528a","#5a9bb9","#b98a52","#7a8a3a","#52b98a"];
 
@@ -22,6 +24,7 @@ export async function renderMistakes(view){
         <label>Wrong answer I chose</label><input name="wrong_answer" />
         <label>Correct answer</label><input name="correct_answer" />
         <label>Why I missed it (one sentence)</label><input name="why" required />
+        <label>Screenshot (optional)</label><input name="image" type="file" accept="image/jpeg,image/png,image/webp" />
         <button style="margin-top:8px">Save mistake</button>
       </form>
     </details>
@@ -39,11 +42,17 @@ export async function renderMistakes(view){
   $("#mForm", view).onsubmit = async e => {
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector("button");
+    let image_url = null;
+    try {
+      const file = f.image.files[0];
+      if (file){ btn.disabled = true; btn.textContent = "Uploading…"; image_url = await uploadImage(file); }
+    } catch { btn.disabled = false; btn.textContent = "Save mistake"; return; }
     await supabase.from("mistakes").insert({
       user_name: state.user.name, skill_tag: f.skill_tag.value,
       wrong_answer: f.wrong_answer.value.trim(),
       correct_answer: f.correct_answer.value.trim(),
-      why: f.why.value.trim(),
+      why: f.why.value.trim(), image_url,
     });
     await logActivity("mistake", `logged a ${f.skill_tag.value} mistake`);
     renderMistakes(view);
@@ -97,6 +106,8 @@ function drawList(mount, mistakes){
       <div style="margin-top:6px"><span class="muted">Chose:</span> ${esc(m.wrong_answer || "—")}
         &nbsp;→&nbsp; <span class="muted">Correct:</span> <b>${esc(m.correct_answer || "—")}</b></div>
       <div style="margin-top:4px"><i>“${esc(m.why)}”</i></div>
+      ${thumb(m.image_url)}
+      ${reactionsHTML("mistake", m.id)}
       <button class="tiny soft" data-act="discuss" style="margin-top:6px">💬 Comment</button>
       <div data-comments hidden></div>
     </div>`).join("");
@@ -109,4 +120,5 @@ function drawList(mount, mistakes){
       if (!box.hidden) renderComments("mistake_comments", "mistake_id", id, box);
     };
   });
+  wireReactions(mount);
 }

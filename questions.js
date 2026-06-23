@@ -4,6 +4,8 @@ import { SKILLS } from "./config.js";
 import { esc, timeAgo, $ } from "./util.js";
 import { helpButton, wireHelp } from "./help.js";
 import { renderComments } from "./comments.js";
+import { reactionsHTML, wireReactions } from "./reactions.js";
+import { uploadImage, thumb } from "./uploads.js";
 
 export async function renderQuestions(view){
   view.innerHTML = `
@@ -17,6 +19,7 @@ export async function renderQuestions(view){
         <label>Explanation</label><textarea name="explanation"></textarea>
         <label>Skill tag</label>
         <select name="skill_tag">${SKILLS.map(s => `<option>${s}</option>`).join("")}</select>
+        <label>Screenshot (optional)</label><input name="image" type="file" accept="image/jpeg,image/png,image/webp" />
         <button style="margin-top:10px">Post question</button>
       </form>
     </details>
@@ -34,12 +37,18 @@ export async function renderQuestions(view){
   $("#qForm", view).onsubmit = async e => {
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector("button");
+    let image_url = null;
+    try {
+      const file = f.image.files[0];
+      if (file){ btn.disabled = true; btn.textContent = "Uploading…"; image_url = await uploadImage(file); }
+    } catch { btn.disabled = false; btn.textContent = "Post question"; return; }
     await supabase.from("questions").insert({
       user_name: state.user.name,
       question: f.question.value.trim(),
       answer: f.answer.value.trim(),
       explanation: f.explanation.value.trim(),
-      skill_tag: f.skill_tag.value,
+      skill_tag: f.skill_tag.value, image_url,
     });
     await logActivity("question", `posted a ${f.skill_tag.value} question`);
     renderQuestions(view);
@@ -69,6 +78,7 @@ function drawList(mount, questions, attempts, skill, reload){
         <span class="pill ${q.status}">${q.status.replace("_", " ")}</span>
       </div>
       <div style="margin:8px 0;white-space:pre-wrap">${esc(q.question)}</div>
+      ${thumb(q.image_url)}
       <div class="muted">posted by ${esc(q.user_name)} · ${timeAgo(q.created_at)}</div>
 
       <details style="margin-top:8px"><summary style="cursor:pointer;color:var(--blue)">Show answer</summary>
@@ -83,6 +93,7 @@ function drawList(mount, questions, attempts, skill, reload){
         <button class="tiny soft" data-act="need_help">Need help</button>
         <button class="tiny soft" data-act="discuss">💬 Discuss</button>
       </div>
+      ${reactionsHTML("question", q.id)}
       <div data-comments hidden></div>
     </div>`;
   }).join("");
@@ -106,4 +117,5 @@ function drawList(mount, questions, attempts, skill, reload){
       if (!box.hidden) renderComments("question_comments", "question_id", id, box);
     };
   });
+  wireReactions(mount);
 }

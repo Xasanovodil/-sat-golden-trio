@@ -2,6 +2,7 @@
 import { supabase, state, logActivity } from "./db.js";
 import { esc, timeAgo, todayStr, addDays, downloadCSV, toast, $ } from "./util.js";
 import { helpButton, wireHelp } from "./help.js";
+import { reactionsHTML, wireReactions } from "./reactions.js";
 
 const INTERVALS = { Again:1, Hard:3, Good:7, Easy:21 };
 const STATUS    = { Again:"struggling", Hard:"learning", Good:"learning", Easy:"mastered" };
@@ -88,6 +89,8 @@ async function panelWords(panel){
   $("#exp", panel).onclick = () => downloadCSV("vocab.csv",
     [["word", "definition", "example", "added_by"],
      ...words.map(w => [w.word, w.definition, w.example, w.user_name])]);
+
+  wireReactions(panel);
 }
 
 function wordCard(w){
@@ -97,6 +100,7 @@ function wordCard(w){
     ${w.example ? `<div class="muted" style="font-style:italic">“${esc(w.example)}”</div>` : ""}
     ${w.image_url ? `<img src="${esc(w.image_url)}" alt="" style="max-width:100%;border-radius:8px;margin-top:6px" />` : ""}
     <div class="muted" style="margin-top:4px">added by ${esc(w.user_name)} · ${timeAgo(w.created_at)}</div>
+    ${reactionsHTML("vocab", w.id)}
   </div>`;
 }
 
@@ -223,4 +227,6 @@ async function panelSearch(panel, q){
     ${a.map(x => `<div class="card"><b>${esc(x.affix)}</b> <span class="chip">${esc(x.kind)}</span>
        <div>${esc(x.meaning || "")}</div><div class="muted">${esc(x.example || "")}</div></div>`).join("")}
     ${(w.length + a.length) ? "" : '<p class="muted">Nothing found.</p>'}`;
+
+  wireReactions(panel);
 }

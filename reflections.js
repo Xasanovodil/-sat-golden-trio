@@ -2,6 +2,7 @@
 import { supabase, state, logActivity } from "./db.js";
 import { esc, prettyDate, pad, $ } from "./util.js";
 import { helpButton, wireHelp } from "./help.js";
+import { reactionsHTML, wireReactions } from "./reactions.js";
 
 function thisWeekStart(){
   const d = new Date();
@@ -42,8 +43,10 @@ export async function renderReflections(view){
           ${r.learned   ? `<div style="margin-top:4px"><span class="muted">Learned:</span> ${esc(r.learned)}</div>` : ""}
           ${r.missed    ? `<div><span class="muted">Missed:</span> ${esc(r.missed)}</div>` : ""}
           ${r.plan_next ? `<div><span class="muted">Next week:</span> ${esc(r.plan_next)}</div>` : ""}
+          ${reactionsHTML("reflection", r.id)}
         </div>`).join("")}`).join("") || ""}`;
   wireHelp(view, "reflections");
+  wireReactions(view);
 
   $("#rForm", view).onsubmit = async e => {
     e.preventDefault();

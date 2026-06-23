@@ -4,6 +4,7 @@ import { supabase, state, logActivity } from "./db.js";
 import { esc, timeAgo, todayStr, $ } from "./util.js";
 import { helpButton, wireHelp } from "./help.js";
 import { renderComments } from "./comments.js";
+import { reactionsHTML, wireReactions } from "./reactions.js";
 
 const PALETTE = ["#c79a3a","#3d6ea5","#3f8f5b","#c0563f","#8a6db9","#b9528a","#5a9bb9","#b98a52"];
 
@@ -79,6 +80,7 @@ function drawList(mount, tests){
       <div class="spread"><b>${esc(t.user_name)}</b><span class="tag">${t.total}</span></div>
       <div class="muted">${t.taken_on} · R&W ${t.rw_score ?? "—"} · Math ${t.math_score ?? "—"} · ${timeAgo(t.created_at)}</div>
       ${t.notes ? `<div style="margin-top:6px">${esc(t.notes)}</div>` : ""}
+      ${reactionsHTML("test", t.id)}
       <button class="tiny soft" data-act="discuss" style="margin-top:6px">💬 Comment</button>
       <div data-comments hidden></div>
     </div>`).join("");
@@ -91,4 +93,5 @@ function drawList(mount, tests){
       if (!box.hidden) renderComments("test_comments", "test_id", id, box);
     };
   });
+  wireReactions(mount);
 }
