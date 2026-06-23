@@ -1,10 +1,10 @@
 // ── Section 4: Shared Mistake Log ───────────────────────────────────────────
 import Chart from "https://esm.sh/chart.js@4/auto";
-import { supabase, state, logActivity } from "../db.js";
-import { SKILLS } from "../config.js";
-import { esc, timeAgo, downloadCSV, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
-import { renderComments } from "../comments.js";
+import { supabase, state, logActivity } from "./db.js";
+import { SKILLS } from "./config.js";
+import { esc, timeAgo, downloadCSV, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
+import { renderComments } from "./comments.js";
 
 const PALETTE = ["#c79a3a","#3d6ea5","#3f8f5b","#c0563f","#8a6db9","#b9528a","#5a9bb9","#b98a52","#7a8a3a","#52b98a"];
 
