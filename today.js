@@ -1,6 +1,6 @@
 // ── Homepage: Today's view (+ live activity feed) ───────────────────────────
-import { supabase, state } from "../db.js";
-import { esc, prettyDate, timeAgo, todayStr, $ } from "../util.js";
+import { supabase, state } from "./db.js";
+import { esc, prettyDate, timeAgo, todayStr, $ } from "./util.js";
 import { getDueWords } from "./vocab.js";
 
 let feedChannel = null;
