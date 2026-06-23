@@ -1,7 +1,7 @@
 // ── Weekly Reflections (Sunday retrospective) ───────────────────────────────
-import { supabase, state, logActivity } from "../db.js";
-import { esc, prettyDate, pad, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
+import { supabase, state, logActivity } from "./db.js";
+import { esc, prettyDate, pad, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
 
 function thisWeekStart(){
   const d = new Date();
