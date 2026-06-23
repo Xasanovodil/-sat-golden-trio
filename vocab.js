@@ -1,7 +1,7 @@
 // ── Section 3: Vocabulary (words + flashcards + affixes + search) ───────────
-import { supabase, state, logActivity } from "../db.js";
-import { esc, timeAgo, todayStr, addDays, downloadCSV, toast, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
+import { supabase, state, logActivity } from "./db.js";
+import { esc, timeAgo, todayStr, addDays, downloadCSV, toast, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
 
 const INTERVALS = { Again:1, Hard:3, Good:7, Easy:21 };
 const STATUS    = { Again:"struggling", Hard:"learning", Good:"learning", Easy:"mastered" };
