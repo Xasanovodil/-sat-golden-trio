@@ -1,9 +1,9 @@
 // ── Section 2: Question Bank ─────────────────────────────────────────────────
-import { supabase, state, logActivity } from "../db.js";
-import { SKILLS } from "../config.js";
-import { esc, timeAgo, $ } from "../util.js";
-import { helpButton, wireHelp } from "../help.js";
-import { renderComments } from "../comments.js";
+import { supabase, state, logActivity } from "./db.js";
+import { SKILLS } from "./config.js";
+import { esc, timeAgo, $ } from "./util.js";
+import { helpButton, wireHelp } from "./help.js";
+import { renderComments } from "./comments.js";
 
 export async function renderQuestions(view){
   view.innerHTML = `
